@@ -1,10 +1,11 @@
-import tensorflow as tf
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.layers import GlobalAveragePooling2D, Dense, Dropout
 from tensorflow.keras.models import Model
 
 from app.utils.image_preprocessing import preprocess_image
+from app.models.download_models import download_models
 
+download_models()
 
 def build_mri_model():
     base_model = ResNet50(

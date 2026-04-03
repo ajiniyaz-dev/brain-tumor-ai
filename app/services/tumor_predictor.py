@@ -4,7 +4,9 @@ from tensorflow.keras.layers import GlobalAveragePooling2D, Dense, Dropout, Batc
 from tensorflow.keras.models import Model
 
 from app.utils.image_preprocessing import preprocess_image
+from app.models.download_models import download_models
 
+download_models()
 
 def build_tumor_model():
     base_model = ResNet50(
