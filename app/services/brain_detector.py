@@ -5,7 +5,7 @@ from app.utils.image_preprocessing import preprocess_image
 
 def build_mri_model():
     base_model = ResNet50(
-        weights="imagenet",
+        weights=None,
         include_top=False,
         input_shape=(224, 224, 3)
     )
