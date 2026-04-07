@@ -8,11 +8,19 @@ from app.services.brain_detector import detect_brain_mri
 from app.services.tumor_predictor import predict_tumor
 from app.database.db import init_db, get_connection
 from enum import Enum
+from fastapi.middleware.cors import CORSMiddleware
 import uuid
 import os
 
 app = FastAPI(title="Brain Tumor Detection API")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # create feedback folder
 FEEDBACK_DIR = "app/feedback"
 os.makedirs(FEEDBACK_DIR, exist_ok=True)
@@ -28,15 +36,6 @@ class TumorType(str, Enum):
     notumor = "notumor"
 
 
-from fastapi.middleware.cors import CORSMiddleware
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 @app.get("/")
