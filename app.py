@@ -4,7 +4,7 @@ from PIL import Image
 
 from app.services.brain_detector import detect_brain_mri
 from app.services.tumor_predictor import predict_tumor
-
+from app.utils.image_preprocessing import preprocess_image
 
 def predict(image):
     try:

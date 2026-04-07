@@ -4,7 +4,7 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.layers import GlobalAveragePooling2D, Dense, Dropout, BatchNormalization
 from tensorflow.keras.models import Model
-from app.utils.image_preprocessing import preprocess_image
+from app import preprocess_image
 
 model = None
 
