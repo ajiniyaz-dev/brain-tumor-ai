@@ -1,3 +1,6 @@
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
 import numpy as np
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.layers import GlobalAveragePooling2D, Dense, Dropout, BatchNormalization
@@ -5,6 +8,7 @@ from tensorflow.keras.models import Model
 from app.utils.image_preprocessing import preprocess_image
 
 model = None
+
 
 def build_tumor_model():
     base_model = ResNet50(
@@ -21,8 +25,7 @@ def build_tumor_model():
     x = Dense(128, activation="relu")(x)
     outputs = Dense(4, activation="softmax")(x)
 
-    model = Model(inputs=base_model.input, outputs=outputs)
-    return model
+    return Model(inputs=base_model.input, outputs=outputs)
 
 
 def get_model():
@@ -41,14 +44,11 @@ def predict_tumor(file):
         model_instance = get_model()
         img = preprocess_image(file)
 
-        prediction = model_instance.predict(img)[0]
-        class_index = np.argmax(prediction)
+        prediction = model_instance.predict(img, verbose=0)[0]
+        class_index = int(np.argmax(prediction))
+        confidence = float(prediction[class_index])
 
-        return {
-            "tumor_type": CLASSES[class_index],
-            "confidence": float(prediction[class_index])
-        }
+        return f"{CLASSES[class_index]} ({confidence:.2f})"
 
     except Exception as e:
-        print("ERROR:", e)
-        return {"status": "error", "message": str(e)}
+        return f"Error in tumor prediction: {str(e)}"

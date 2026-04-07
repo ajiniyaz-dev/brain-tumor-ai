@@ -1,3 +1,6 @@
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.layers import GlobalAveragePooling2D, Dense, Dropout, BatchNormalization
 from tensorflow.keras.models import Model
@@ -5,9 +8,10 @@ from app.utils.image_preprocessing import preprocess_image
 
 model = None
 
+
 def build_mri_model():
     base_model = ResNet50(
-        weights="imagenet",
+        weights=None,
         include_top=False,
         input_shape=(224, 224, 3)
     )
@@ -19,10 +23,8 @@ def build_mri_model():
     x = Dropout(0.3)(x)
     output = Dense(1, activation="sigmoid")(x)
 
-    model = Model(inputs=base_model.input, outputs=output)
-    return model
-for layer in base_model.layers:
-    layer.trainable = False
+    return Model(inputs=base_model.input, outputs=output)
+
 
 def get_model():
     global model
@@ -37,25 +39,32 @@ HIGH_THRESHOLD = 0.8
 
 
 def detect_brain_mri(file):
-    model_instance = get_model()
-    img = preprocess_image(file)
+    try:
+        model_instance = get_model()
+        img = preprocess_image(file)
 
-    prediction = model_instance.predict(img)[0][0]
+        prediction = model_instance.predict(img, verbose=0)[0][0]
 
-    if prediction < LOW_THRESHOLD:
+        if prediction < LOW_THRESHOLD:
+            return {
+                "status": "brain_mri",
+                "confidence": float(1 - prediction)
+            }
+
+        elif prediction > HIGH_THRESHOLD:
+            return {
+                "status": "not_brain",
+                "confidence": float(prediction)
+            }
+
+        else:
+            return {
+                "status": "uncertain",
+                "confidence": float(max(prediction, 1 - prediction))
+            }
+
+    except Exception as e:
         return {
-            "status": "brain_mri",
-            "confidence": float(1 - prediction),
-        }
-
-    elif prediction > HIGH_THRESHOLD:
-        return {
-            "status": "not_brain",
-            "confidence": float(prediction)
-        }
-
-    else:
-        return {
-            "status": "uncertain",
-            "confidence": float(max(prediction, 1 - prediction))
+            "status": "error",
+            "message": str(e)
         }
