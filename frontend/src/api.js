@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: "https://brain-tumor-ai-1-hm7r.onrender.com",
-  timeout: 60000, // ✅ prevent timeout
+  timeout: 120000, // ✅ prevent timeout
 });
 
 export const predictTumor = (file) => {
