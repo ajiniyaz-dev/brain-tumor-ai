@@ -48,7 +48,10 @@ def predict_tumor(file):
         class_index = int(np.argmax(prediction))
         confidence = float(prediction[class_index])
 
-        return f"{CLASSES[class_index]} ({confidence:.2f})"
+        return {
+            "tumor_type": CLASSES[class_index],
+            "confidence": confidence
+        }
 
     except Exception as e:
-        return f"Error in tumor prediction: {str(e)}"
+        return {"error": str(e)}

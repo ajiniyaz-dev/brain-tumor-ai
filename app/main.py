@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from app.models.download_models import download_models
 
-# ✅ DOWNLOAD FIRST (CRITICAL)
+# download models at startup
 download_models()
 
 from fastapi import FastAPI, UploadFile, File, Form
@@ -23,10 +23,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# create feedback folder
+
 FEEDBACK_DIR = "app/feedback"
 os.makedirs(FEEDBACK_DIR, exist_ok=True)
-# init DB
+
 init_db()
 
 
@@ -35,8 +35,6 @@ class TumorType(str, Enum):
     meningioma = "meningioma"
     pituitary = "pituitary"
     notumor = "notumor"
-
-
 
 
 @app.get("/")
