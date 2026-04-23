@@ -292,3 +292,28 @@ The models were trained using image preprocessing and augmentation techniques su
 
 The MRI validation model helps prevent invalid uploads and improves reliability by ensuring only brain MRI scans are passed to the tumor classifier.
 
+# Screenshots
+
+## Home Page
+
+![Home Page](screenshots/home.png)
+
+## MRI Image Uploaded
+
+![Upload Preview](screenshots/upload.png)
+
+## Prediction Result
+
+![Prediction Result](screenshots/prediction.png)
+
+
+# Deployment
+
+The project is deployed on Render cloud hosting.
+
+Live Demo:
+
+https://brain-tumor-ai-2-ew2j.onrender.com/
+
+> Note: The application is hosted on Render free tier, so the first request may take 30–60 seconds to wake up after inactivity.
+
