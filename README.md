@@ -315,5 +315,5 @@ Live Demo:
 
 https://brain-tumor-ai-2-ew2j.onrender.com/
 
-> Note: The application is hosted on Render free tier, so the first request may take 30–60 seconds to wake up after inactivity.
+> Note: The application is hosted on Render free tier, so it is available upon the request.
 
