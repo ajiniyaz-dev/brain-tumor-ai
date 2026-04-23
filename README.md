@@ -1,58 +1,64 @@
-#  Brain Tumor Detection AI
+# Brain Tumor Detection AI
 
-A full-stack AI-powered web application for automated **brain MRI validation** and **brain tumor classification** using deep learning.
+A full-stack AI-powered medical imaging web application for automated **brain MRI validation** and **brain tumor classification** using deep learning.
 
-The system combines:
+The platform helps users upload MRI scans and receive AI-assisted predictions through an interactive web interface.
 
-- **FastAPI backend** for model inference and REST API
-- **React frontend** for user interaction
-- **TensorFlow / Keras models** for medical image analysis
+## Core System Components
 
-Two separate deep learning models are used:
+- **FastAPI Backend** – Handles REST API requests and model inference
+- **React Frontend** – Provides a modern user interface for image upload and prediction results
+- **TensorFlow / Keras Models** – Performs medical image analysis using deep learning
 
-1. **MRI Detector Model** – Checks whether the uploaded image is a valid brain MRI scan  
+## AI Pipeline
+
+Two separate models are used:
+
+1. **MRI Detector Model** – Verifies whether the uploaded image is a valid brain MRI scan  
 2. **Tumor Classification Model** – Predicts tumor type from valid MRI images
 
----
 
 # Features
 
 ## Frontend
-- Modern React web interface
-- Upload MRI images easily
-- Display predictions with confidence scores
-- User-friendly experience
+- Modern React-based user interface
+- Easy MRI image upload system
+- Real-time prediction results display
+- Confidence score visualization
+- Clean and user-friendly experience
 
 ## Backend
-- FastAPI REST API
-- Real-time predictions
+- FastAPI REST API architecture
+- Real-time model inference
 - Feedback collection system
-- SQLite integration
+- SQLite database integration
+- Modular backend structure
 
-## AI Models
+## AI Capabilities
 - Brain MRI image validation
 - Multi-class tumor classification
-- Confidence score output
+- Confidence score generation
+- Automated image preprocessing
+- Fast prediction response time
 
----
 
-#  Tumor Classes
+# Tumor Classes
 
-The classifier predicts one of the following:
+The classification model predicts one of the following categories:
 
-- Glioma
-- Meningioma
-- Pituitary
-- No Tumor
+- **Glioma** – Tumor that develops in the glial cells of the brain  
+- **Meningioma** – Tumor that forms in the meninges surrounding the brain and spinal cord  
+- **Pituitary** – Tumor located in the pituitary gland region  
+- **No Tumor** – No detectable tumor pattern found in the MRI scan
 
----
 
-#  Tech Stack
+# Tech Stack
 
 ## Frontend
 - React.js
 - JavaScript
-- CSS
+- HTML5
+- CSS3
 - Axios / Fetch API
 
 ## Backend
@@ -60,10 +66,10 @@ The classifier predicts one of the following:
 - Uvicorn
 - Python
 
-## Deep Learning
+## Deep Learning / AI
 - TensorFlow
 - Keras
-- ResNet50
+- ResNet50 (Transfer Learning)
 - NumPy
 - OpenCV
 - Pillow
@@ -71,26 +77,42 @@ The classifier predicts one of the following:
 ## Database
 - SQLite
 
----
+## Tools / Deployment
+- GitHub
+- Git
+- Virtual Environment (venv)
+- Cloud Deployment Ready
 
-#  Project Structure
+
+# Project Structure
 
 ```text
 brain-tumor-ai/
 │
-├── app/                     # FastAPI Backend
-│   ├── main.py
-│   ├── services/
-│   ├── utils/
-│   ├── models/
-│   ├── database/
-│   └── feedback/
+├── app/                        # FastAPI backend
+│   ├── main.py                 # Main API entry point
+│   ├── services/              # Prediction and business logic
+│   ├── utils/                 # Image preprocessing utilities
+│   ├── models/                # AI model files / loaders
+│   ├── database/             # SQLite database logic
+│   └── feedback/             # Feedback handling system
 │
-├── frontend/               # React Frontend
-│   ├── src/
-│   ├── public/
-│   └── build/
+├── frontend/                  # React frontend
+│   ├── src/                  # Frontend source code
+│   ├── public/               # Static assets
+│   └── build/                # Production build files
 │
-├── requirements.txt
-├── package.json
+├── requirements.txt          # Python dependencies
+├── package.json              # Frontend dependencies
+├── package-lock.json         # Locked npm versions
+├── runtime.txt               # Deployment runtime version
+├── .gitignore                # Ignored files/folders
 └── README.md
+``
+# Installation & Local Setup
+
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/ajiniyaz-dev/brain-tumor-ai.git
+cd brain-tumor-ai
