@@ -275,6 +275,19 @@ The models were trained using image preprocessing and augmentation techniques su
 
 ---
 
+# Training Procedure
+
+- Dataset split into training / validation / testing sets
+- Batch size: 32
+- Epochs: 10 (MRI detector), up to 25 (tumor classifier)
+- Optimizer: Adam (lr=0.0001)
+- Loss functions:
+  - binary_crossentropy
+  - categorical_crossentropy
+- Early stopping used to prevent overfitting
+- ModelCheckpoint used to save best model
+- ResNet50 chosen for strong transfer learning performance on image tasks
+
 ## Performance
 
 ### MRI Detector Model
